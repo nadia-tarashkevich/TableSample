@@ -12,6 +12,7 @@ import com.intellij.ui.content.ContentFactory;
 import com.intellij.ui.table.JBTable;
 import org.jetbrains.annotations.NotNull;
 
+import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -57,17 +58,17 @@ public class MyToolWindowFactory implements ToolWindowFactory {
     toolWindow.getContentManager().addContent(content);
   }
 
-    public class BoardTableCellRenderer extends DefaultTableCellRenderer {
+  public class BoardTableCellRenderer extends DefaultTableCellRenderer {
 
-      private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-      public Component getTableCellRendererComponent(JBTable table, Object value, boolean isSelected, boolean hasFocus,int row,int col) {
+    @Override
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+      Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+      c.setBackground(Color.yellow); // custom background color to proof that we are actrually calling the rendered
+      return c;
+    }
 
-        Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
-        Color randomColor = new Color(100, 200, 200);
-        c.setBackground(randomColor);
-
-        return c;
-      }
   }
+
 }
